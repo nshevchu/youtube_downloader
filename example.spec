@@ -11,8 +11,8 @@ from kivymd import hooks_path as kivymd_hooks_path
 block_cipher = None
 
 
-a = Analysis(['kivymd_test.py'],
-             pathex=['D:\\Scripts\\test'],
+a = Analysis(['main.py'],
+             pathex=['D:\\Scripts\\youtube_downloader'],
              binaries=[],
              datas=[],
              hiddenimports=['kivymd.uix.label','kivymd.app','kivymd' ],
