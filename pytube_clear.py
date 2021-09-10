@@ -25,6 +25,7 @@ def download_video(link, **kwargs):
     yt = YouTube(link)
     title = yt.title
     title = title.replace('/', '_')
+    prefix = kwargs.get('prefix','')
     author = yt.author
     author = author.replace('/', '_')
     thumbnail = yt.thumbnail_url
@@ -34,7 +35,7 @@ def download_video(link, **kwargs):
     try:
         stream = stream_detection(yt.streams)
         print('Downloading started for {}'.format(title))
-        stream.download('downloads/{}'.format(author))
+        stream.download('downloads/{}{}'.format(author, prefix))
         print('Downloading ended for {}'.format(title))
     except:
         print('Downloading started for {}'.format(title))
@@ -66,10 +67,10 @@ def download_video(link, **kwargs):
                 print(f)
 
         if exact_res_found:
-            ydl_opts = {'format': '{}+{}'.format(id_v, id_a), 'outtmpl': r'downloads/{}/{}'.format(author, eval("r'{}'".format(title)))}
+            ydl_opts = {'format': '{}+{}'.format(id_v, id_a), 'outtmpl': r'downloads/{}{}/{}'.format(author,prefix, eval("r'{}'".format(title)))}
         else:
             ydl_opts = {'format': '{}+{}'.format(highest['id'], id_a),
-                        'outtmpl': r'downloads/{}/{}'.format(author, eval("r'{}'".format(title)))}
+                        'outtmpl': r'downloads/{}{}/{}'.format(author,prefix, eval("r'{}'".format(title)))}
 
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([link])
@@ -94,9 +95,10 @@ def downloader(url, mode='channel', **kwargs):
         if mode == 'playlist':
             print('..playlist mode')
             playlist = Playlist(url)
+            print(f'PLAYLIST NAME IS {playlist.title}')
             for index, link in enumerate(playlist.video_urls):
                 print(link)
-                download_video(link, resolution=kwargs['resolution'])
+                download_video(link, resolution=kwargs['resolution'], prefix=f'/{playlist.title}')
 
 
         if mode == 'video':

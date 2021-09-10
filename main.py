@@ -102,15 +102,17 @@ class MainApp(MDApp):
         self.button_resselect = MDRectangleFlatButton(text='Chose resolution',
                                           size_hint=(0.7, 0.2),
                                           pos_hint={'center_x': 0.5, 'center_y': 0.0},
-                                          text_color=(1,1,1,1),
-                                          line_color=(1,0,0,1), on_release=lambda x: self.menu.open()
+                                          #text_color=(1,1,1,1),
+                                          #line_color=(1,0,0,1),
+                                        on_release=lambda x: self.menu.open()
                                           )
 
         self.button_ch = MDRectangleFlatButton(text='Start',
                                           size_hint=(0.7, 0.2),
                                           pos_hint={'center_x':0.5, 'center_y':0.0},
-                                          text_color=(1,1,1,1),
-                                          line_color=(1,0,0,1), on_release=lambda x: self.start_download()
+                                          #text_color=(1,1,1,1),
+                                          #line_color=(1,0,0,1),
+                                               on_release=lambda x: self.start_download()
                                           )
         self.menu = MDDropdownMenu(
             caller=self.button_ch,
